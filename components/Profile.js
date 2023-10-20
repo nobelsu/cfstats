@@ -1,15 +1,7 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  Pressable,
-  Image,
-} from "react-native";
+import { View, Text, Pressable, Image } from "react-native";
 import { useState, useEffect } from "react";
 import { styles } from "../styles";
 import * as Crypto from "expo-crypto";
-import { BASE_URL, KEY, SECRET } from "@env";
 
 export default function Profile({ navigation, route }) {
   const BASE = process.env.BASE_URL;
@@ -19,8 +11,8 @@ export default function Profile({ navigation, route }) {
   const [hand, changeHand] = useState(route.params.handle);
   const [rating, changeRating] = useState("Unrated");
   const [upRank, changeUpRank] = useState("Unranked");
-  const [org, changeOrg] = useState("NA");
-  const [country, changeCount] = useState("NA");
+  const [org, changeOrg] = useState("N/A");
+  const [country, changeCount] = useState("N/A");
   const [imgurl, changeImg] = useState("");
 
   async function encrypt(mes) {
@@ -52,34 +44,36 @@ export default function Profile({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={{ uri: imgurl }}
-        style={{ width: "25%", aspectRatio: 1, marginBottom: 20 }}
-      />
-      <View style={{ marginBottom: 30 }}>
-        <Text style={styles.title}>{hand}</Text>
-        <Text style={styles.para}>
-          <Text style={{ fontWeight: "bold" }}>Current Rating:</Text> {rating}
-        </Text>
-        <Text style={styles.para}>
-          <Text style={{ fontWeight: "bold" }}>Current Rank:</Text> {upRank}
-        </Text>
-        <Text style={styles.para}>
-          <Text style={{ fontWeight: "bold" }}>Organization:</Text> {org}
-        </Text>
-        <Text style={styles.para}>
-          <Text style={{ fontWeight: "bold" }}>Country:</Text> {country}
-        </Text>
-      </View>
+      <View style={styles.container2}>
+        <Image
+          source={{ uri: imgurl }}
+          style={{ width: "30%", aspectRatio: 1, marginBottom: 20 }}
+        />
+        <View style={{ marginBottom: 30 }}>
+          <Text style={styles.title}>{hand}</Text>
+          <Text style={styles.para}>
+            <Text style={{ fontWeight: "bold" }}>Current Rating:</Text> {rating}
+          </Text>
+          <Text style={styles.para}>
+            <Text style={{ fontWeight: "bold" }}>Current Rank:</Text> {upRank}
+          </Text>
+          <Text style={styles.para}>
+            <Text style={{ fontWeight: "bold" }}>Organization:</Text> {org}
+          </Text>
+          <Text style={styles.para}>
+            <Text style={{ fontWeight: "bold" }}>Country:</Text> {country}
+          </Text>
+        </View>
 
-      <Pressable
-        onPress={() => {
-          navigation.goBack();
-        }}
-        style={{ alignItems: "center", width: "100%" }}
-      >
-        <Text style={styles.btn}>Return</Text>
-      </Pressable>
+        <Pressable
+          onPress={() => {
+            navigation.goBack();
+          }}
+          style={{ alignItems: "center", width: "100%" }}
+        >
+          <Text style={styles.btn}>Return</Text>
+        </Pressable>
+      </View>
     </View>
   );
 }
