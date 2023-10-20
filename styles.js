@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     flex: 1,
     alignItems: "center",
+    width: "100%",
   },
   title: {
     textAlign: "center",
@@ -29,6 +30,11 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     width: "80%",
     maxWidth: 300,
+    textAlign: "center",
+  },
+  para: {
+    fontSize: 15,
+    marginBottom: 10,
     textAlign: "center",
   },
 });

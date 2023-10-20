@@ -1,22 +1,26 @@
 import { StyleSheet, View, Text, TextInput, Pressable } from "react-native";
 import { useState, useEffect } from "react";
 import { styles } from "../styles";
+import * as Crypto from "expo-crypto";
 
 export default function Home({ navigation }) {
-  const [subcol, changesub] = useState("white");
-  const [texcol, changetex] = useState("black");
   const [handle, changehand] = useState("");
 
-  function pressBtn() {
+  async function pressBtn() {
     // changesub("red");
     // changetex("white");
-    navigation.navigate("Profile", { handle });
+    if (handle != "") {
+      await navigation.navigate("Profile", { handle });
+      await changehand("");
+    } else {
+      return;
+    }
   }
 
-  useEffect(() => {
-    changesub("white");
-    changetex("black");
-  });
+  // useEffect(() => {
+  //   changesub("white");
+  //   changetex("black");
+  // });
 
   return (
     <View style={styles.container}>
@@ -38,23 +42,7 @@ export default function Home({ navigation }) {
         style={{ width: "100%", alignItems: "center" }}
         onPress={pressBtn}
       >
-        <Text
-          style={{
-            padding: 10,
-            fontSize: 15,
-            borderColor: "black",
-            borderWidth: 2,
-            borderRadius: 10,
-            width: "80%",
-            maxWidth: 300,
-            textAlign: "center",
-            backgroundColor: subcol,
-            overflow: "hidden",
-            color: texcol,
-          }}
-        >
-          Search
-        </Text>
+        <Text style={styles.btn}>Search</Text>
       </Pressable>
     </View>
   );
