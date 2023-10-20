@@ -8,10 +8,15 @@ export default function Home({ navigation }) {
   const [handle, changehand] = useState("");
 
   function pressBtn() {
-    changesub("red");
-    changetex("white");
+    // changesub("red");
+    // changetex("white");
     navigation.navigate("Profile", { handle });
   }
+
+  useEffect(() => {
+    changesub("white");
+    changetex("black");
+  });
 
   return (
     <View style={styles.container}>
