@@ -16,6 +16,7 @@ export default function Profile({ navigation, route }) {
   const APIKEY = process.env.KEY;
   const APISECRET = process.env.SECRET;
 
+  const [hand, changeHand] = useState(route.params.handle);
   const [rating, changeRating] = useState("Unrated");
   const [upRank, changeUpRank] = useState("Unranked");
   const [org, changeOrg] = useState("NA");
@@ -42,6 +43,7 @@ export default function Profile({ navigation, route }) {
     if (json.result[0].organization) changeOrg(json.result[0].organization);
     if (json.result[0].country) changeCount(json.result[0].country);
     changeImg(json.result[0].avatar);
+    changeHand(json.result[0].handle);
   }
 
   useEffect(() => {
@@ -55,7 +57,7 @@ export default function Profile({ navigation, route }) {
         style={{ width: "25%", aspectRatio: 1, marginBottom: 20 }}
       />
       <View style={{ marginBottom: 30 }}>
-        <Text style={styles.title}>{route.params.handle}</Text>
+        <Text style={styles.title}>{hand}</Text>
         <Text style={styles.para}>
           <Text style={{ fontWeight: "bold" }}>Current Rating:</Text> {rating}
         </Text>
