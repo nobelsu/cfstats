@@ -2,19 +2,27 @@ import { StyleSheet, View, Text, TextInput, Pressable } from "react-native";
 import { useState, useEffect } from "react";
 import { styles } from "../styles";
 import * as Crypto from "expo-crypto";
+import { BASE_URL, KEY, SECRET } from "@env";
 
 export default function Home({ navigation }) {
+  const BASE = process.env.BASE_URL;
   const [handle, changehand] = useState("");
 
   async function pressBtn() {
     // changesub("red");
     // changetex("white");
+    console.log(handle);
     if (handle != "") {
-      await navigation.navigate("Profile", { handle });
-      await changehand("");
-    } else {
-      return;
+      const infoURL = BASE + "user.info?handles=" + handle;
+      let response = await fetch(infoURL);
+      let json = await response.json();
+      if (json.status == "OK") {
+        navigation.navigate("Profile", { handle });
+      } else {
+        navigation.navigate("Error", { handle });
+      }
     }
+    changehand("");
   }
 
   // useEffect(() => {

@@ -16,10 +16,10 @@ export default function Profile({ navigation, route }) {
   const APIKEY = process.env.KEY;
   const APISECRET = process.env.SECRET;
 
-  const [rating, changeRating] = useState("");
-  const [upRank, changeUpRank] = useState("");
-  const [org, changeOrg] = useState("");
-  const [country, changeCount] = useState("");
+  const [rating, changeRating] = useState("Unrated");
+  const [upRank, changeUpRank] = useState("Unranked");
+  const [org, changeOrg] = useState("NA");
+  const [country, changeCount] = useState("NA");
   const [imgurl, changeImg] = useState("");
 
   async function encrypt(mes) {
@@ -34,12 +34,13 @@ export default function Profile({ navigation, route }) {
     let response = await fetch(infoURL);
     let json = await response.json();
     console.log(json.result[0]);
-    changeRating(json.result[0].rating);
-    changeUpRank(
-      json.result[0].rank[0].toUpperCase() + json.result[0].rank.slice(1)
-    );
-    changeOrg(json.result[0].organization);
-    changeCount(json.result[0].country);
+    if (json.result[0].rating) changeRating(json.result[0].rating);
+    if (json.result[0].rank)
+      changeUpRank(
+        json.result[0].rank[0].toUpperCase() + json.result[0].rank.slice(1)
+      );
+    if (json.result[0].organization) changeOrg(json.result[0].organization);
+    if (json.result[0].country) changeCount(json.result[0].country);
     changeImg(json.result[0].avatar);
   }
 
@@ -71,7 +72,7 @@ export default function Profile({ navigation, route }) {
 
       <Pressable
         onPress={() => {
-          navigation.navigate("Home");
+          navigation.goBack();
         }}
         style={{ alignItems: "center", width: "100%" }}
       >

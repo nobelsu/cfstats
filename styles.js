@@ -13,6 +13,11 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 30,
   },
+  errort: {
+    textAlign: "center",
+    fontSize: 25,
+    marginBottom: 30,
+  },
   inp: {
     padding: 5,
     fontSize: 15,
